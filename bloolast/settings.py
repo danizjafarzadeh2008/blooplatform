@@ -10,7 +10,7 @@ def get_bool(name: str, default: bool = False) -> bool:
     return v.lower() in {"1", "true", "yes", "on"}
 
 SECRET_KEY = os.getenv("DJANGO_SECRET_KEY", "django-insecure-s72rbahthzz0ir$b#ognfb_#n!=_x_r^_ng#z((1e+o(i28c8&")
-DEBUG = get_bool("DJANGO_DEBUG", True)
+DEBUG = get_bool("DJANGO_DEBUG", False)
 
 ALLOWED_HOSTS = ["52.64.133.100", 'bloo.az', 'www.bloo.az', "*"]
 CSRF_TRUSTED_ORIGINS = [o for o in os.getenv("CSRF_TRUSTED_ORIGINS", "").split(",") if o]
