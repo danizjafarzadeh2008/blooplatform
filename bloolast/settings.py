@@ -9,7 +9,7 @@ def get_bool(name: str, default: bool = False) -> bool:
         return default
     return v.lower() in {"1", "true", "yes", "on"}
 
-SECRET_KEY = os.getenv("DJANGO_SECRET_KEY", "INSECURE-CHANGE-ME")
+SECRET_KEY = os.getenv("DJANGO_SECRET_KEY", "django-insecure-s72rbahthzz0ir$b#ognfb_#n!=_x_r^_ng#z((1e+o(i28c8&")
 DEBUG = get_bool("DJANGO_DEBUG", True)
 
 ALLOWED_HOSTS = [h for h in os.getenv("DJANGO_ALLOWED_HOSTS", "").split(",") if h]
