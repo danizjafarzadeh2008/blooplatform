@@ -1,0 +1,554 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Coming Soon - Bloo</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css" rel="stylesheet">
+    <style>
+        @import "tailwindcss";
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: linear-gradient(-45deg, #001f3f, #5e399e, #401560, #001f3f);
+            background-size: 400% 400%;
+            animation: gradientShift 15s ease infinite;
+            min-height: 100vh;
+        }
+
+        .gradient-bg {
+            background: linear-gradient(-45deg, #001f3f, #5e399e, #401560, #001f3f);
+            background-size: 400% 400%;
+            animation: gradientShift 15s ease infinite;
+        }
+
+        @keyframes gradientShift {
+            0% {
+                background-position: 0% 50%;
+            }
+
+            50% {
+                background-position: 100% 50%;
+            }
+
+            100% {
+                background-position: 0% 50%;
+            }
+        }
+
+        .gradient-text {
+            background: linear-gradient(135deg, #0b2b5a 0%, #6b3bd9 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent !important;
+            background-clip: text;
+        }
+
+        .navbar-glass {
+            backdrop-filter: blur(20px);
+            background: rgba(255, 255, 255, 0.15);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.15);
+            transition: all 0.3s ease;
+        }
+
+        .navbar-white {
+            backdrop-filter: blur(20px);
+            background: rgba(255, 255, 255, 0.95);
+            border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+        }
+
+        .navbar-white .text-white {
+            color: #374151 !important;
+        }
+
+        .navbar-white .logo-icon i {
+            color: white !important;
+        }
+
+        .navbar-white .hover\\:text-purple-300:hover {
+            color: #6b3bd9 !important;
+        }
+
+        .focus-ring:focus {
+            outline: 2px solid #6b3bd9;
+            outline-offset: 2px;
+        }
+
+        .card-hover {
+            transition: all 0.3s ease;
+        }
+
+        .card-hover:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+        }
+
+        .mobile-menu {
+            display: none;
+            position: absolute;
+            top: 100%;
+            left: 0;
+            right: 0;
+            background: #374151;
+            border-top: 1px solid rgba(255, 255, 255, 0.2);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+        }
+
+        .mobile-menu.active {
+            display: block;
+        }
+
+        .mobile-menu a {
+            display: block;
+            padding: 1rem 1.5rem;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            color: white;
+            text-decoration: none;
+            transition: background-color 0.2s;
+        }
+
+        .mobile-menu a:hover {
+            background-color: rgba(107, 59, 217, 0.2);
+            color: #c4b5fd;
+        }
+
+        .navbar-white .mobile-menu {
+            background: white;
+            border-top: 1px solid rgba(0, 0, 0, 0.1);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.15);
+        }
+
+        .navbar-white .mobile-menu a {
+            color: #374151;
+            border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+        }
+
+        .navbar-white .mobile-menu a:hover {
+            background-color: rgba(107, 59, 217, 0.1);
+            color: #6b3bd9;
+        }
+
+        .countdown-box {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 0.5rem;
+            padding: 1rem;
+            min-width: 80px;
+        }
+
+        @media (min-width: 640px) {
+            .countdown-box {
+                min-width: 100px;
+                padding: 1.5rem;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .text-responsive {
+                font-size: clamp(1.5rem, 5vw, 2.5rem);
+            }
+
+            .subtext-responsive {
+                font-size: clamp(1rem, 3vw, 1.25rem);
+            }
+
+            .countdown-responsive {
+                flex-wrap: wrap;
+                justify-content: center;
+                gap: 0.5rem;
+            }
+
+            .countdown-box {
+                min-width: 70px;
+                padding: 0.75rem;
+                flex: 1;
+                max-width: 80px;
+            }
+
+            .feature-grid {
+                grid-template-columns: 1fr;
+                gap: 1rem;
+            }
+
+            .footer-grid {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+        }
+
+        @media (max-width: 640px) {
+            .main-container {
+                padding: 1rem;
+            }
+
+            .content-box {
+                padding: 1.5rem;
+            }
+
+            .countdown-box {
+                min-width: 60px;
+                padding: 0.5rem;
+            }
+
+            .countdown-box .text-3xl {
+                font-size: 1.5rem;
+            }
+
+            .countdown-box .text-sm {
+                font-size: 0.75rem;
+            }
+
+            .rocket-icon {
+                width: 4rem;
+                height: 4rem;
+            }
+
+            .rocket-icon .text-4xl {
+                font-size: 2rem;
+            }
+        }
+
+        @media (min-width: 641px) and (max-width: 1024px) {
+            .feature-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .footer-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (hover: none) and (pointer: coarse) {
+            .button-touch {
+                padding: 0.75rem 1.5rem;
+                min-height: 44px;
+            }
+
+            .link-touch {
+                padding: 0.5rem;
+                min-height: 44px;
+                display: flex;
+                align-items: center;
+            }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            * {
+                animation-duration: 0.01ms !important;
+                animation-iteration-count: 1 !important;
+                transition-duration: 0.01ms !important;
+            }
+
+            .gradient-bg {
+                animation: none;
+            }
+        }
+
+        @media (max-width: 1024px) {
+            .navbar-mobile {
+                display: block;
+            }
+
+            .navbar-desktop {
+                display: none;
+            }
+        }
+
+        @media (min-width: 1025px) {
+            .navbar-mobile {
+                display: none;
+            }
+
+            .navbar-desktop {
+                display: flex;
+            }
+        }
+
+        .optimize-legibility {
+            text-rendering: optimizeLegibility;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+
+        .focus-ring:focus {
+            outline: 2px solid #6b3bd9;
+            outline-offset: 2px;
+        }
+
+        html, body {
+            overflow-x: hidden;
+            max-width: 100%;
+        }
+    </style>
+</head>
+
+<body class="bg-gray-50">
+    <nav id="navbar" class="fixed w-full top-0 z-50 transition-all duration-300">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-16">
+                <div class="flex items-center space-x-3">
+                    <a href="{% url 'home' %}" class="flex items-center space-x-3">
+                        <div class="w-8 h-8 gradient-bg rounded-lg flex items-center justify-center logo-icon">
+                            <i class="fas fa-graduation-cap text-white text-sm"></i>
+                        </div>
+                        <span class="text-xl font-bold text-white">Bloo</span>
+                    </a>
+                </div>
+
+                <div class="hidden lg:flex items-center space-x-8 navbar-desktop">
+                    <a href="{% url 'home' %}"
+                        class="text-white hover:text-purple-300 transition-colors focus-ring rounded px-2 py-1">Home</a>
+                    <a href="{% url 'mentor_list' %}"
+                        class="text-white hover:text-purple-300 transition-colors focus-ring rounded px-2 py-1">Mentors</a>
+                    <a href="{% url 'coming_soon' %}"
+                        class="text-white hover:text-purple-300 transition-colors focus-ring rounded px-2 py-1">Students</a>
+                    <a href="{% url 'coming_soon' %}"
+                        class="text-white hover:text-purple-300 transition-colors focus-ring rounded px-2 py-1">Teachers</a>
+                    <a href="{% url 'coming_soon' %}"
+                        class="text-white hover:text-purple-300 transition-colors focus-ring rounded px-2 py-1">Events</a>
+                    <a href="{% url 'coming_soon' %}"
+                        class="text-white hover:text-purple-300 transition-colors focus-ring rounded px-2 py-1">Materials</a>
+                    <a href="{% url 'contact' %}"
+                        class="text-white hover:text-purple-300 transition-colors focus-ring rounded px-2 py-1">Contact</a>
+                </div>
+
+                <div class="lg:hidden navbar-mobile">
+                    <button id="mobile-menu-btn" class="text-white hover:text-purple-300 focus-ring rounded p-2">
+                        <i class="fas fa-bars" id="menu-icon"></i>
+                    </button>
+                </div>
+            </div>
+
+            <div id="mobile-menu" class="mobile-menu lg:hidden">
+                <a href="{% url 'home' %}" class="focus-ring">Home</a>
+                <a href="{% url 'mentor_list' %}" class="focus-ring">Mentors</a>
+                <a href="{% url 'coming_soon' %}" class="focus-ring">Students</a>
+                <a href="{% url 'coming_soon' %}" class="focus-ring">Teachers</a>
+                <a href="{% url 'coming_soon' %}" class="focus-ring">Events</a>
+                <a href="{% url 'coming_soon' %}" class="focus-ring">Materials</a>
+                <a href="{% url 'contact' %}" class="focus-ring">Contact</a>
+            </div>
+        </div>
+    </nav>
+    <main class="pt-16 min-h-screen flex items-center justify-center">
+        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center py-12">
+            <div class="bg-white/10 backdrop-blur-sm rounded-2xl p-8 sm:p-12 shadow-xl border border-white/20">
+                <div class="w-24 h-24 bg-white/20 rounded-full flex items-center justify-center mx-auto mb-8">
+                    <i class="fas fa-rocket text-white text-4xl"></i>
+                </div>
+                <h1 class="text-4xl sm:text-5xl lg:text-6xl font-bold mb-6 text-white">Coming Soon</h1>
+                <p class="text-xl sm:text-2xl text-gray-200 mb-8 max-w-2xl mx-auto">
+                    We're working hard to bring you an amazing new feature. Stay tuned for something special!
+                </p>
+                <div class="flex justify-center space-x-4 sm:space-x-6 mb-10" data-countdown="2025-10-15T00:00:00">
+                </div>
+                <div class="mt-10">
+                    <div class="flex justify-between items-center mb-2">
+                        <span class="text-white font-medium">Development Progress</span>
+                        <span class="text-white font-medium" id="progress-percentage">25%</span>
+                    </div>
+                    <div class="w-full bg-white/20 rounded-full h-2.5">
+                        <div class="bg-white h-2.5 rounded-full" style="width: 25%"></div>
+                    </div>
+                </div>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mt-12">
+                <div class="bg-white/10 backdrop-blur-sm rounded-xl p-6 border border-white/20">
+                    <div class="w-12 h-12 bg-white/20 rounded-lg flex items-center justify-center mb-4 mx-auto">
+                        <i class="fas fa-graduation-cap text-white text-xl"></i>
+                    </div>
+                    <h3 class="text-lg font-semibold text-white mb-2">Great Community</h3>
+                    <p class="text-gray-200">Socially and academically successful students from different backgrounds
+                    </p>
+                </div>
+
+                <div class="bg-white/10 backdrop-blur-sm rounded-xl p-6 border border-white/20">
+                    <div class="w-12 h-12 bg-white/20 rounded-lg flex items-center justify-center mb-4 mx-auto">
+                        <i class="fas fa-users text-white text-xl"></i>
+                    </div>
+                    <h3 class="text-lg font-semibold text-white mb-2">Better Collaboration</h3>
+                    <p class="text-gray-200">Improved tools for mentors and students to connect and collaborate.</p>
+                </div>
+
+                <div class="bg-white/10 backdrop-blur-sm rounded-xl p-6 border border-white/20">
+                    <div class="w-12 h-12 bg-white/20 rounded-lg flex items-center justify-center mb-4 mx-auto">
+                        <i class="fas fa-chart-line text-white text-xl"></i>
+                    </div>
+                    <h3 class="text-lg font-semibold text-white mb-2">Self Improvement</h3>
+                    <p class="text-gray-200">Access to the event details and materials for preparing to international
+                        and national examination </p>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer class="bg-gray-900 text-white py-12 sm:py-16">
+        <div class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 sm:gap-8 mb-6 sm:mb-8">
+                <div class="sm:col-span-2 lg:col-span-1">
+                    <div class="flex items-center space-x-3 mb-4 sm:mb-6">
+                        <div class="w-8 h-8 gradient-bg rounded-lg flex items-center justify-center">
+                            <i class="fas fa-graduation-cap text-white text-sm"></i>
+                        </div>
+                    </div>
+                    <p class="text-gray-400 mb-4 text-sm sm:text-base">Empowering students, mentors, and teachers to
+                        achieve academic and social excellence together.</p>
+                    <div class="flex space-x-4">
+                        <a href="https://www.facebook.com/share/1B7a6V6cYD/"
+                            class="text-gray-400 hover:text-white transition-colors focus-ring rounded p-1">
+                            <i class="fab fa-facebook-f text-lg"></i>
+                        </a>
+                        <a href="https://www.threads.com/@bloo.az"
+                            class="text-gray-400 hover:text-white transition-colors focus-ring rounded p-1">
+                            <i class="fab fa-threads text-lg"></i>
+                        </a>
+                        <a href="https://www.instagram.com/bloo.az/"
+                            class="text-gray-400 hover:text-white transition-colors focus-ring rounded p-1">
+                            <i class="fab fa-instagram text-lg"></i>
+                        </a>
+                        <a href="https://www.linkedin.com/company/bloo-az/"
+                            class="text-gray-400 hover:text-white transition-colors focus-ring rounded p-1">
+                            <i class="fab fa-linkedin-in text-lg"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <div>
+                    <h4 class="text-base sm:text-lg font-semibold mb-4 sm:mb-6">Quick Links</h4>
+                    <ul class="space-y-2 sm:space-y-3">
+                        <li><a href="{% url 'home' %}"
+                                class="text-gray-400 hover:text-white transition-colors focus-ring rounded text-sm sm:text-base">Home</a>
+                        </li>
+                        <li><a href="{% url 'coming_soon' %}"
+                                class="text-gray-400 hover:text-white transition-colors focus-ring rounded text-sm sm:text-base">Students</a>
+                        </li>
+                        <li><a href="{% url 'mentor_list' %}"
+                                class="text-gray-400 hover:text-white transition-colors focus-ring rounded text-sm sm:text-base">Mentors</a>
+                        </li>
+                        <li><a href="{% url 'coming_soon' %}"
+                                class="text-gray-400 hover:text-white transition-colors focus-ring rounded text-sm sm:text-base">Teachers</a>
+                        </li>
+                        <li><a href="{% url 'coming_soon' %}"
+                                class="text-gray-400 hover:text-white transition-colors focus-ring rounded text-sm sm:text-base">Events</a>
+                        </li>
+                    </ul>
+                </div>
+
+                <div>
+                    <h4 class="text-base sm:text-lg font-semibold mb-4 sm:mb-6">Resources</h4>
+                    <ul class="space-y-2 sm:space-y-3">
+                        <li><a href="{% url 'coming_soon' %}"
+                                class="text-gray-400 hover:text-white transition-colors focus-ring rounded text-sm sm:text-base">Study
+                                Materials</a></li>
+                        <li><a href="{% url 'contact' %}"
+                                class="text-gray-400 hover:text-white transition-colors focus-ring rounded text-sm sm:text-base">Help
+                                Center</a></li>
+                        <li><a href="{% url 'contact' %}"
+                                class="text-gray-400 hover:text-white transition-colors focus-ring rounded text-sm sm:text-base">FAQ</a>
+                        </li>
+                    </ul>
+                </div>
+
+                <div>
+                    <h4 class="text-base sm:text-lg font-semibold mb-4 sm:mb-6">Contact</h4>
+                    <ul class="space-y-2 sm:space-y-3 text-gray-400 text-sm sm:text-base">
+                        <li class="flex items-center">
+                            <i class="fas fa-envelope mr-3 flex-shrink-0"></i>
+                            <span class="break-all">info@bloo.az</span>
+                        </li>
+                        <li class="flex items-center">
+                            <i class="fas fa-phone mr-3 flex-shrink-0"></i>
+                            <span>+994 (50) 270-39-19</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-map-marker-alt mr-3 mt-1 flex-shrink-0"></i>
+                            <span>42 Zigh Highway Street<br>Baku, Azerbaijan</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="border-t border-gray-800 pt-8 text-center text-gray-400">
+                <p>&copy; 2025 Bloo — All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+    <script src="{% static 'js/countdown.js' %}"></script>
+    <script>
+        function handleNavbarScroll() {
+            const navbar = document.getElementById('navbar');
+            const scrollY = window.scrollY;
+
+            navbar.classList.remove('navbar-glass', 'navbar-white');
+
+            if (scrollY > 50) {
+                navbar.classList.add('navbar-white');
+            } else {
+                navbar.classList.add('navbar-glass');
+            }
+        }
+
+        function setupMobileMenu() {
+            const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+            const mobileMenu = document.getElementById('mobile-menu');
+            const menuIcon = document.getElementById('menu-icon');
+
+            mobileMenuBtn.addEventListener('click', function () {
+                mobileMenu.classList.toggle('active');
+                if (mobileMenu.classList.contains('active')) {
+                    menuIcon.classList.remove('fa-bars');
+                    menuIcon.classList.add('fa-times');
+                } else {
+                    menuIcon.classList.remove('fa-times');
+                    menuIcon.classList.add('fa-bars');
+                }
+            });
+
+            const mobileMenuLinks = mobileMenu.querySelectorAll('a');
+            mobileMenuLinks.forEach(link => {
+                link.addEventListener('click', function () {
+                    mobileMenu.classList.remove('active');
+                    menuIcon.classList.remove('fa-times');
+                    menuIcon.classList.add('fa-bars');
+                });
+            });
+        }
+
+        function updateCountdown() {
+            const launchDate = new Date();
+            launchDate.setMonth(launchDate.getMonth() + 2);
+
+            const now = new Date();
+            const difference = launchDate - now;
+
+            if (difference > 0) {
+                const days = Math.floor(difference / (1000 * 60 * 60 * 24));
+                const hours = Math.floor((difference % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                const minutes = Math.floor((difference % (1000 * 60 * 60)) / (1000 * 60));
+                const seconds = Math.floor((difference % (1000 * 60)) / 1000);
+
+                document.getElementById('days').textContent = days.toString().padStart(2, '0');
+                document.getElementById('hours').textContent = hours.toString().padStart(2, '0');
+                document.getElementById('minutes').textContent = minutes.toString().padStart(2, '0');
+                document.getElementById('seconds').textContent = seconds.toString().padStart(2, '0');
+            }
+        }
+
+        document.addEventListener('DOMContentLoaded', function () {
+            handleNavbarScroll();
+            setupMobileMenu();
+            updateCountdown();
+            setInterval(updateCountdown, 1000);
+            window.addEventListener('scroll', handleNavbarScroll);
+        });
+    </script>
+</body>
+
+</html>

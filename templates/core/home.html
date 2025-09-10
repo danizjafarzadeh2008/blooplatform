@@ -1,0 +1,286 @@
+{% load static %}
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bloo - Academic & Social Development Platform</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="{% static 'css/home.css' %}">
+</head>
+
+<body class="bg-gray-50">
+    <div id="particles-js"></div>
+    <nav id="navbar" class="fixed w-full top-0 z-50 transition-all duration-300">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-16">
+                <div class="flex items-center space-x-3">
+                    <a href="{% url 'home' %}" class="flex items-center space-x-3">
+                        <div class="w-8 h-8 gradient-bg rounded-lg flex items-center justify-center logo-icon">
+                            <i class="fas fa-graduation-cap text-white text-sm"></i>
+                        </div>
+                        <span class="text-xl font-bold text-white">Bloo</span>
+                    </a>
+                </div>
+
+                <div class="hidden lg:flex items-center space-x-8 navbar-desktop">
+                    <a href="{% url 'home' %}"
+                        class="text-white hover:text-purple-300 transition-colors focus-ring rounded px-2 py-1">Home</a>
+                    <a href="{% url 'mentor_list' %}"
+                        class="text-white hover:text-purple-300 transition-colors focus-ring rounded px-2 py-1">Mentors</a>
+                    <a href="{% url 'coming_soon' %}"
+                        class="text-white hover:text-purple-300 transition-colors focus-ring rounded px-2 py-1">Students</a>
+                    <a href="{% url 'coming_soon' %}"
+                        class="text-white hover:text-purple-300 transition-colors focus-ring rounded px-2 py-1">Teachers</a>
+                    <a href="{% url 'coming_soon' %}"
+                        class="text-white hover:text-purple-300 transition-colors focus-ring rounded px-2 py-1">Events</a>
+                    <a href="{% url 'coming_soon' %}"
+                        class="text-white hover:text-purple-300 transition-colors focus-ring rounded px-2 py-1">Materials</a>
+                    <a href="{% url 'contact' %}"
+                        class="text-white hover:text-purple-300 transition-colors focus-ring rounded px-2 py-1">Contact</a>
+                </div>
+
+                <div class="lg:hidden navbar-mobile">
+                    <button id="mobile-menu-btn" class="text-white hover:text-purple-300 focus-ring rounded p-2">
+                        <i class="fas fa-bars" id="menu-icon"></i>
+                    </button>
+                </div>
+            </div>
+
+            <div id="mobile-menu" class="mobile-menu lg:hidden">
+                <a href="{% url 'home' %}" class="focus-ring">Home</a>
+                <a href="{% url 'mentor_list' %}" class="focus-ring">Mentors</a>
+                <a href="{% url 'coming_soon' %}" class="focus-ring">Students</a>
+                <a href="{% url 'coming_soon' %}" class="focus-ring">Teachers</a>
+                <a href="{% url 'coming_soon' %}" class="focus-ring">Events</a>
+                <a href="{% url 'coming_soon' %}" class="focus-ring">Materials</a>
+                <a href="{% url 'contact' %}" class="focus-ring">Contact</a>
+            </div>
+        </div>
+    </nav>
+
+    <section id="hero-section"
+        class="relative min-h-screen flex items-center justify-center gradient-bg overflow-hidden">
+        <div
+            class="relative z-10 text-center text-white max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 hero-content pt-16 sm:pt-28 md:pt-38">
+            <h1 class="text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-bold mb-8 sm:mb-10 leading-tight">
+                Academic & Social<br class="hidden sm:block">
+                <span class="sm:hidden"> </span>Development Platform
+            </h1>
+            <p class="text-lg sm:text-xl md:text-2xl mb-12 sm:mb-16 text-gray-200 max-w-3xl mx-auto px-2">
+                Connecting students, mentors and teachers to grow academically and socially.
+            </p>
+
+            <div class="max-w-lg mx-auto mb-8 sm:mb-10 px-4">
+                <div class="flex flex-col gap-4 sm:gap-5">
+                    <a href="{% url 'mentor_list' %}"
+                        class="group relative w-full sm:w-auto px-8 sm:px-10 py-4 sm:py-5 bg-white text-purple-600 font-bold rounded-2xl shadow-xl hover:shadow-2xl transform hover:scale-105 transition-all duration-300 focus-ring text-sm sm:text-base overflow-hidden text-center">
+                        <div
+                            class="absolute inset-0 bg-gradient-to-r from-purple-50 to-blue-50 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                        </div>
+                        <span class="relative flex items-center justify-center gap-2">
+                            Meet Our Mentors
+                            <i
+                                class="fas fa-arrow-right text-sm group-hover:translate-x-1 transition-transform duration-300"></i>
+                        </span>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="relative z-10 py-12 sm:py-16 bg-white overflow-hidden">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-8 sm:mb-12">
+                <h2 class="text-2xl sm:text-3xl font-bold mb-3 sm:mb-4 gradient-text">Our Mentors</h2>
+                <p class="text-base sm:text-lg text-gray-600 max-w-2xl mx-auto">Connect with our experienced mentors
+                    dedicated to your growth</p>
+            </div>
+
+            <div class="relative">
+                <div class="flex space-x-3 sm:space-x-4 md:space-x-6 carousel">
+                    {% for mentor in mentors %}
+                    <div class="flex-shrink-0 text-center min-w-[80px] sm:min-w-[100px]">
+                        {% if mentor.profile_picture %}
+                        <img src="{{ mentor.profile_picture.url }}" alt="{{ mentor.name }}"
+                            class="w-12 h-12 sm:w-16 sm:h-16 rounded-full mx-auto mb-2 sm:mb-3 object-cover">
+                        {% else %}
+                        <div
+                            class="w-12 h-12 sm:w-16 sm:h-16 bg-gradient-to-r {{mentor.gradient}} rounded-full mx-auto mb-2 sm:mb-3 flex items-center justify-center text-white font-semibold text-xs sm:text-sm">
+                            {{ mentor.initials }}
+                        </div>
+                        {% endif %}
+                        <p class="font-medium text-gray-800 text-xs sm:text-sm truncate">{{ mentor.name }}</p>
+                        <p class="text-xs text-gray-500">{{ mentor.university }}</p>
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="relative z-10 py-16 sm:py-20 bg-gray-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-12 sm:mb-16">
+                <h2 class="text-3xl sm:text-4xl font-bold mb-3 sm:mb-4 gradient-text">Our Services</h2>
+                <p class="text-lg sm:text-xl text-gray-600 max-w-3xl mx-auto px-4">Comprehensive tools and resources to
+                    support your academic and social growth</p>
+            </div>
+
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 sm:gap-8">
+                <div class="bg-white rounded-xl p-6 sm:p-8 shadow-sm card-hover">
+                    <div
+                        class="w-10 h-10 sm:w-12 sm:h-12 gradient-bg rounded-lg flex items-center justify-center mb-4 sm:mb-6">
+                        <i class="fas fa-book-open text-white text-lg sm:text-xl"></i>
+                    </div>
+                    <h3 class="text-lg sm:text-xl font-semibold mb-2 sm:mb-3 text-gray-800">Academic & Social Community
+                    </h3>
+                    <p class="text-gray-600 mb-4 sm:mb-6 text-sm sm:text-base">Getting into the academically and
+                        socially rich community </p>
+                    <a href="{% url 'coming_soon' %}"
+                        class="text-purple-600 font-medium hover:text-purple-700 transition-colors focus-ring rounded text-sm sm:text-base">Learn
+                        more →</a>
+                </div>
+
+                <div class="bg-white rounded-xl p-6 sm:p-8 shadow-sm card-hover">
+                    <div
+                        class="w-10 h-10 sm:w-12 sm:h-12 gradient-bg rounded-lg flex items-center justify-center mb-4 sm:mb-6">
+                        <i class="fas fa-user-friends text-white text-lg sm:text-xl"></i>
+                    </div>
+                    <h3 class="text-lg sm:text-xl font-semibold mb-2 sm:mb-3 text-gray-800">Mentorship</h3>
+                    <p class="text-gray-600 mb-4 sm:mb-6 text-sm sm:text-base">One-on-one guidance from experienced
+                        mentors in your field.</p>
+                    <a href="{% url 'mentor_list' %}"
+                        class="text-purple-600 font-medium hover:text-purple-700 transition-colors focus-ring rounded text-sm sm:text-base">Learn
+                        more →</a>
+                </div>
+
+                <div class="bg-white rounded-xl p-6 sm:p-8 shadow-sm card-hover">
+                    <div
+                        class="w-10 h-10 sm:w-12 sm:h-12 gradient-bg rounded-lg flex items-center justify-center mb-4 sm:mb-6">
+                        <i class="fas fa-calendar-alt text-white text-lg sm:text-xl"></i>
+                    </div>
+                    <h3 class="text-lg sm:text-xl font-semibold mb-2 sm:mb-3 text-gray-800">Events & Workshops</h3>
+                    <p class="text-gray-600 mb-4 sm:mb-6 text-sm sm:text-base">Live events, webinars and competitions to
+                        enhance learning.</p>
+                    <a href="{% url 'coming_soon' %}"
+                        class="text-purple-600 font-medium hover:text-purple-700 transition-colors focus-ring rounded text-sm sm:text-base">Learn
+                        more →</a>
+                </div>
+
+                <div class="bg-white rounded-xl p-6 sm:p-8 shadow-sm card-hover">
+                    <div
+                        class="w-10 h-10 sm:w-12 sm:h-12 gradient-bg rounded-lg flex items-center justify-center mb-4 sm:mb-6">
+                        <i class="fas fa-file-alt text-white text-lg sm:text-xl"></i>
+                    </div>
+                    <h3 class="text-lg sm:text-xl font-semibold mb-2 sm:mb-3 text-gray-800">Resources</h3>
+                    <p class="text-gray-600 mb-4 sm:mb-6 text-sm sm:text-base">Study materials, past papers and
+                        comprehensive guides.</p>
+                    <a href="{% url 'coming_soon' %}"
+                        class="text-purple-600 font-medium hover:text-purple-700 transition-colors focus-ring rounded text-sm sm:text-base">Learn
+                        more →</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer class="bg-gray-900 text-white py-12 sm:py-16">
+        <div class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 sm:gap-8 mb-6 sm:mb-8">
+                <div class="sm:col-span-2 lg:col-span-1">
+                    <div class="flex items-center space-x-3 mb-4 sm:mb-6">
+                        <div class="w-8 h-8 gradient-bg rounded-lg flex items-center justify-center">
+                            <i class="fas fa-graduation-cap text-white text-sm"></i>
+                        </div>
+                    </div>
+                    <p class="text-gray-400 mb-4 text-sm sm:text-base">Empowering students, mentors, and teachers to
+                        achieve academic and social excellence together.</p>
+                    <div class="flex space-x-4">
+                        <a href="https://www.facebook.com/share/1B7a6V6cYD/"
+                            class="text-gray-400 hover:text-white transition-colors focus-ring rounded p-1">
+                            <i class="fab fa-facebook-f text-lg"></i>
+                        </a>
+                        <a href="https://www.threads.com/@bloo.az"
+                            class="text-gray-400 hover:text-white transition-colors focus-ring rounded p-1">
+                            <i class="fab fa-threads text-lg"></i>
+                        </a>
+                        <a href="https://www.instagram.com/bloo.az/"
+                            class="text-gray-400 hover:text-white transition-colors focus-ring rounded p-1">
+                            <i class="fab fa-instagram text-lg"></i>
+                        </a>
+                        <a href="https://www.linkedin.com/company/bloo-az/"
+                            class="text-gray-400 hover:text-white transition-colors focus-ring rounded p-1">
+                            <i class="fab fa-linkedin-in text-lg"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <div>
+                    <h4 class="text-base sm:text-lg font-semibold mb-4 sm:mb-6">Quick Links</h4>
+                    <ul class="space-y-2 sm:space-y-3">
+                        <li><a href="{% url 'home' %}"
+                                class="text-gray-400 hover:text-white transition-colors focus-ring rounded text-sm sm:text-base">Home</a>
+                        </li>
+                        <li><a href="{% url 'coming_soon' %}"
+                                class="text-gray-400 hover:text-white transition-colors focus-ring rounded text-sm sm:text-base">Students</a>
+                        </li>
+                        <li><a href="{% url 'mentor_list' %}"
+                                class="text-gray-400 hover:text-white transition-colors focus-ring rounded text-sm sm:text-base">Mentors</a>
+                        </li>
+                        <li><a href="{% url 'coming_soon' %}"
+                                class="text-gray-400 hover:text-white transition-colors focus-ring rounded text-sm sm:text-base">Teachers</a>
+                        </li>
+                        <li><a href="{% url 'coming_soon' %}"
+                                class="text-gray-400 hover:text-white transition-colors focus-ring rounded text-sm sm:text-base">Events</a>
+                        </li>
+                    </ul>
+                </div>
+
+                <div>
+                    <h4 class="text-base sm:text-lg font-semibold mb-4 sm:mb-6">Resources</h4>
+                    <ul class="space-y-2 sm:space-y-3">
+                        <li><a href="{% url 'coming_soon' %}"
+                                class="text-gray-400 hover:text-white transition-colors focus-ring rounded text-sm sm:text-base">Study
+                                Materials</a></li>
+                        <li><a href="{% url 'contact' %}"
+                                class="text-gray-400 hover:text-white transition-colors focus-ring rounded text-sm sm:text-base">Help
+                                Center</a></li>
+                        <li><a href="{% url 'contact' %}"
+                                class="text-gray-400 hover:text-white transition-colors focus-ring rounded text-sm sm:text-base">FAQ</a>
+                        </li>
+                    </ul>
+                </div>
+
+                <div>
+                    <h4 class="text-base sm:text-lg font-semibold mb-4 sm:mb-6">Contact</h4>
+                    <ul class="space-y-2 sm:space-y-3 text-gray-400 text-sm sm:text-base">
+                        <li class="flex items-center">
+                            <i class="fas fa-envelope mr-3 flex-shrink-0"></i>
+                            <span class="break-all">info@bloo.az</span>
+                        </li>
+                        <li class="flex items-center">
+                            <i class="fas fa-phone mr-3 flex-shrink-0"></i>
+                            <span>+994 (50) 270-39-19</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-map-marker-alt mr-3 mt-1 flex-shrink-0"></i>
+                            <span>42 Zigh Highway Street<br>Baku, Azerbaijan</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="border-t border-gray-800 pt-8 text-center text-gray-400">
+                <p>&copy; 2025 Bloo — All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+    <script src="{% static 'js/jquery-3.7.1.min.js' %}"></script>
+    <script src="{% static 'js/particles.js' %}"></script>
+    <script src="{% static 'js/app.js' %}"></script>
+    <script src="{% static 'js/home.js' %}"></script>
+</body>
+
+</html>

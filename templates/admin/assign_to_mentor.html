@@ -1,0 +1,61 @@
+{% extends "admin/base_site.html" %}
+{% load i18n static %}
+
+{% block extrastyle %}
+{{ block.super }}
+<link rel="stylesheet" type="text/css" href="{% static "admin/css/forms.css" %}">
+<style>
+    .form-row {
+        margin-bottom: 15px;
+    }
+    .form-row label {
+        display: block;
+        font-weight: bold;
+        margin-bottom: 5px;
+    }
+    .form-row select {
+        width: 100%;
+        padding: 8px;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+<div id="content-main">
+    <h1>Assign Question to Mentor</h1>
+    
+    <div class="module">
+        <h2>Question Details</h2>
+        <div class="form-row">
+            <label>From:</label>
+            <p>{{ question.user_name }} ({{ question.user_email }})</p>
+        </div>
+        <div class="form-row">
+            <label>Question:</label>
+            <p style="white-space: pre-wrap;">{{ question.question_text }}</p>
+        </div>
+    </div>
+    
+    <div class="module">
+        <h2>Select a Mentor</h2>
+        <form method="post">
+            {% csrf_token %}
+            <div class="form-row">
+                <label for="mentor">Choose a mentor:</label>
+                <select name="mentor" id="mentor" required>
+                    <option value="">-- Select a mentor --</option>
+                    {% for mentor in mentors %}
+                    <option value="{{ mentor.id }}">{{ mentor.name }} - {{ mentor.university }} ({{ mentor.department }})</option>
+                    {% endfor %}
+                </select>
+            </div>
+            <div class="submit-row">
+                <input type="submit" value="Assign and Send Email" class="default">
+                <a href="{% url 'admin:mentors_question_changelist' %}" class="button">Cancel</a>
+            </div>
+        </form>
+    </div>
+</div>
+{% endblock %}

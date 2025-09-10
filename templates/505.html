@@ -1,0 +1,431 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Server Error - Bloo</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        @import "tailwindcss";
+
+        body { 
+            font-family: 'Inter', sans-serif; 
+            background: linear-gradient(-45deg, #001f3f, #5e399e, #401560, #001f3f);
+            background-size: 400% 400%;
+            animation: gradientShift 15s ease infinite;
+            min-height: 100vh;
+        }
+
+        .gradient-bg {
+            background: linear-gradient(-45deg, #001f3f, #5e399e, #401560, #001f3f);
+            background-size: 400% 400%;
+            animation: gradientShift 15s ease infinite;
+        }
+
+        @keyframes gradientShift {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        .gradient-text {
+            background: linear-gradient(135deg, #0b2b5a 0%, #6b3bd9 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent !important;
+            background-clip: text;
+        }
+
+        .navbar-glass {
+            backdrop-filter: blur(20px);
+            background: rgba(255, 255, 255, 0.15);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.15);
+            transition: all 0.3s ease;
+        }
+
+        .navbar-white {
+            backdrop-filter: blur(20px);
+            background: rgba(255, 255, 255, 0.95);
+            border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+        }
+
+        .navbar-white .text-white {
+            color: #374151 !important;
+        }
+
+        .navbar-white .logo-icon i {
+            color: white !important;
+        }
+        
+        .navbar-white .hover\\:text-purple-300:hover {
+            color: #6b3bd9 !important;
+        }
+
+        .focus-ring:focus {
+            outline: 2px solid #6b3bd9;
+            outline-offset: 2px;
+        }
+
+        .card-hover {
+            transition: all 0.3s ease;
+        }
+
+        .card-hover:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+        }
+
+        .mobile-menu {
+            display: none;
+            position: absolute;
+            top: 100%;
+            left: 0;
+            right: 0;
+            background: #374151;
+            border-top: 1px solid rgba(255, 255, 255, 0.2);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+        }
+
+        .mobile-menu.active {
+            display: block;
+        }
+
+        .mobile-menu a {
+            display: block;
+            padding: 1rem 1.5rem;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            color: white;
+            text-decoration: none;
+            transition: background-color 0.2s;
+        }
+
+        .mobile-menu a:hover {
+            background-color: rgba(107, 59, 217, 0.2);
+            color: #c4b5fd;
+        }
+
+        .navbar-white .mobile-menu {
+            background: white;
+            border-top: 1px solid rgba(0, 0, 0, 0.1);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.15);
+        }
+
+        .navbar-white .mobile-menu a {
+            color: #374151;
+            border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+        }
+
+        .navbar-white .mobile-menu a:hover {
+            background-color: rgba(107, 59, 217, 0.1);
+            color: #6b3bd9;
+        }
+
+        @keyframes float {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+            100% { transform: translateY(0px); }
+        }
+
+        .floating {
+            animation: float 3s ease-in-out infinite;
+        }
+
+        @media (max-width: 640px) {
+            .error-code {
+                font-size: 6rem !important;
+            }
+            
+            .error-message {
+                font-size: 1.5rem !important;
+            }
+            
+            .action-buttons {
+                flex-direction: column;
+                gap: 1rem;
+            }
+            
+            .action-buttons a {
+                width: 100%;
+                text-align: center;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .error-code {
+                font-size: 8rem;
+            }
+            
+            .error-illustration {
+                width: 200px;
+                height: 200px;
+            }
+        }
+
+        @media (min-width: 769px) and (max-width: 1024px) {
+            .error-code {
+                font-size: 10rem;
+            }
+            
+            .error-illustration {
+                width: 250px;
+                height: 250px;
+            }
+        }
+    </style>
+</head>
+<body class="bg-gray-50">
+    <nav id="navbar" class="fixed w-full top-0 z-50 transition-all duration-300 navbar-glass">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-16">
+                
+                <div class="flex items-center space-x-3">
+                    <a href="{% url 'home' %}" class="flex items-center space-x-3">
+                        <div class="w-8 h-8 gradient-bg rounded-lg flex items-center justify-center logo-icon">
+                            <i class="fas fa-graduation-cap text-white text-sm"></i>
+                        </div>
+                        <span class="text-xl font-bold text-white">Bloo</span>
+                    </a>
+                </div>
+
+                <div class="hidden lg:flex items-center space-x-8 navbar-desktop">
+                    <a href="{% url 'home' %}" class="text-white hover:text-purple-300 transition-colors focus-ring rounded px-2 py-1">Home</a>
+                    <a href="{% url 'mentor_list' %}" class="text-white hover:text-purple-300 transition-colors focus-ring rounded px-2 py-1">Mentors</a>
+                    <a href="{% url 'coming_soon' %}" class="text-white hover:text-purple-300 transition-colors focus-ring rounded px-2 py-1">Students</a>
+                    <a href="{% url 'coming_soon' %}" class="text-white hover:text-purple-300 transition-colors focus-ring rounded px-2 py-1">Teachers</a>
+                    <a href="{% url 'coming_soon' %}" class="text-white hover:text-purple-300 transition-colors focus-ring rounded px-2 py-1">Events</a>
+                    <a href="{% url 'coming_soon' %}" class="text-white hover:text-purple-300 transition-colors focus-ring rounded px-2 py-1">Materials</a>
+                    <a href="{% url 'contact' %}" class="text-white hover:text-purple-300 transition-colors focus-ring rounded px-2 py-1">Contact</a>
+                </div>
+                
+                <div class="lg:hidden navbar-mobile">
+                    <button id="mobile-menu-btn" class="text-white hover:text-purple-300 focus-ring rounded p-2">
+                        <i class="fas fa-bars" id="menu-icon"></i>
+                    </button>
+                </div>
+            </div>
+            
+            <div id="mobile-menu" class="mobile-menu lg:hidden">
+                <a href="{% url 'home' %}" class="focus-ring">Home</a>
+                <a href="{% url 'mentor_list' %}" class="focus-ring">Mentors</a>
+                <a href="{% url 'coming_soon' %}" class="focus-ring">Students</a>
+                <a href="{% url 'coming_soon' %}" class="focus-ring">Teachers</a>
+                <a href="{% url 'coming_soon' %}" class="focus-ring">Events</a>
+                <a href="{% url 'coming_soon' %}" class="focus-ring">Materials</a>
+                <a href="{% url 'contact' %}" class="focus-ring">Contact</a>
+            </div>
+        </div>
+    </nav>
+
+    <main class="pt-16 min-h-screen flex items-center justify-center">
+        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center py-12 w-full">
+            <div class="bg-white/10 backdrop-blur-sm rounded-2xl p-8 sm:p-12 shadow-xl border border-white/20">
+                <div class="floating mb-8">
+                    <div class="error-illustration mx-auto w-64 h-64 bg-white/20 rounded-full flex items-center justify-center">
+                        <div class="text-center">
+                            <div class="error-code text-7xl font-bold text-white mb-2">500</div>
+                            <div class="error-message text-2xl text-white">Server Error</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <h1 class="text-2xl sm:text-3xl font-bold mb-4 text-white">Oops!</h1>
+                <p class="text-lg text-gray-200 mb-8 max-w-2xl mx-auto">
+                    <strong>Something went wrong on our end.</strong> 
+                    The server encountered an internal error and was unable to complete your request.
+                </p>
+                
+                <div class="action-buttons flex flex-col sm:flex-row gap-4 justify-center mb-8">
+                    <a href="{% url 'home' %}" class="bg-white text-purple-600 py-3 px-6 rounded-lg font-medium hover:bg-gray-100 transition-colors focus-ring">
+                        <i class="fas fa-home mr-2"></i>Go Home
+                    </a>
+                    <a href="{% url 'mentor_list' %}" class="bg-purple-600 text-white py-3 px-6 rounded-lg font-medium hover:bg-purple-700 transition-colors focus-ring">
+                        <i class="fas fa-users mr-2"></i>Browse Mentors
+                    </a>
+                    <a href="{% url 'contact' %}" class="bg-transparent border border-white text-white py-3 px-6 rounded-lg font-medium hover:bg-white/10 transition-colors focus-ring">
+                        <i class="fas fa-envelope mr-2"></i>Contact Support
+                    </a>
+                </div>
+                
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 text-left">
+                    <div class="bg-white/5 rounded-lg p-4">
+                        <h3 class="text-white font-semibold mb-2"><i class="fas fa-graduation-cap mr-2"></i>Popular Pages</h3>
+                        <ul class="space-y-2">
+                            <li><a href="{% url 'mentor_list' %}" class="text-gray-300 hover:text-white transition-colors">Mentor Directory</a></li>
+                            <li><a href="{% url 'coming_soon' %}" class="text-gray-300 hover:text-white transition-colors">Student Resources</a></li>
+                            <li><a href="{% url 'coming_soon' %}" class="text-gray-300 hover:text-white transition-colors">Upcoming Events</a></li>
+                        </ul>
+                    </div>
+                    
+                    <div class="bg-white/5 rounded-lg p-4">
+                        <h3 class="text-white font-semibold mb-2"><i class="fas fa-question-circle mr-2"></i>Need Help?</h3>
+                        <ul class="space-y-2">
+                            <li><a href="{% url 'contact' %}" class="text-gray-300 hover:text-white transition-colors">Contact Support</a></li>
+                            <li><a href="{% url 'contact' %}" class="text-gray-300 hover:text-white transition-colors">FAQ Section</a></li>
+                            <li><a href="{% url 'contact' %}" class="text-gray-300 hover:text-white transition-colors">Help Center</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-gray-900 text-white py-12 sm:py-16">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 sm:gap-8 mb-6 sm:mb-8">
+                <!-- About -->
+                <div class="sm:col-span-2 lg:col-span-1">
+                    <div class="flex items-center space-x-3 mb-4 sm:mb-6">
+                        <div class="w-8 h-8 gradient-bg rounded-lg flex items-center justify-center">
+                            <i class="fas fa-graduation-cap text-white text-sm"></i>
+                        </div>
+                        <span class="text-xl font-bold">Bloo</span>
+                    </div>
+                    <p class="text-gray-400 mb-4 text-sm sm:text-base">Empowering students, mentors, and teachers to achieve academic and social excellence together.</p>
+                    <div class="flex space-x-4">
+                        <a href="https://www.facebook.com/share/1B7a6V6cYD/" class="text-gray-400 hover:text-white transition-colors focus-ring rounded p-1">
+                            <i class="fab fa-facebook-f text-lg"></i>
+                        </a>
+                        <a href="https://www.threads.com/@bloo.az" class="text-gray-400 hover:text-white transition-colors focus-ring rounded p-1">
+                            <i class="fab fa-threads text-lg"></i>
+                        </a>
+                        <a href="https://www.instagram.com/bloo.az/" class="text-gray-400 hover:text-white transition-colors focus-ring rounded p-1">
+                            <i class="fab fa-instagram text-lg"></i>
+                        </a>
+                        <a href="https://www.linkedin.com/company/bloo-az/" class="text-gray-400 hover:text-white transition-colors focus-ring rounded p-1">
+                            <i class="fab fa-linkedin-in text-lg"></i>
+                        </a>
+                    </div>
+                </div>
+                
+                <!-- Quick Links -->
+                <div>
+                    <h4 class="text-base sm:text-lg font-semibold mb-4 sm:mb-6">Quick Links</h4>
+                    <ul class="space-y-2 sm:space-y-3">
+                        <li><a href="{% url 'home' %}" class="text-gray-400 hover:text-white transition-colors focus-ring rounded text-sm sm:text-base">Home</a></li>
+                        <li><a href="{% url 'coming_soon' %}" class="text-gray-400 hover:text-white transition-colors focus-ring rounded text-sm sm:text-base">Students</a></li>
+                        <li><a href="{% url 'mentor_list' %}" class="text-gray-400 hover:text-white transition-colors focus-ring rounded text-sm sm:text-base">Mentors</a></li>
+                        <li><a href="{% url 'coming_soon' %}" class="text-gray-400 hover:text-white transition-colors focus-ring rounded text-sm sm:text-base">Teachers</a></li>
+                        <li><a href="{% url 'coming_soon' %}" class="text-gray-400 hover:text-white transition-colors focus-ring rounded text-sm sm:text-base">Events</a></li>
+                    </ul>
+                </div>
+                
+                <!-- Resources -->
+                <div>
+                    <h4 class="text-base sm:text-lg font-semibold mb-4 sm:mb-6">Resources</h4>
+                    <ul class="space-y-2 sm:space-y-3">
+                        <li><a href="{% url 'coming_soon' %}" class="text-gray-400 hover:text-white transition-colors focus-ring rounded text-sm sm:text-base">Study Materials</a></li>
+                        <li><a href="{% url 'contact' %}" class="text-gray-400 hover:text-white transition-colors focus-ring rounded text-sm sm:text-base">Help Center</a></li>
+                        <li><a href="{% url 'contact' %}" class="text-gray-400 hover:text-white transition-colors focus-ring rounded text-sm sm:text-base">FAQ</a></li>
+                    </ul>
+                </div>
+                
+                <!-- Contact -->
+                <div>
+                    <h4 class="text-base sm:text-lg font-semibold mb-4 sm:mb-6">Contact</h4>
+                    <ul class="space-y-2 sm:space-y-3 text-gray-400 text-sm sm:text-base">
+                        <li class="flex items-center">
+                            <i class="fas fa-envelope mr-3 flex-shrink-0"></i>
+                            <span class="break-all">info@bloo.az</span>
+                        </li>
+                        <li class="flex items-center">
+                            <i class="fas fa-phone mr-3 flex-shrink-0"></i>
+                            <span>+994 (50) 270-39-19</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-map-marker-alt mr-3 mt-1 flex-shrink-0"></i>
+                            <span>42 Zigh Highway Street<br>Baku, Azerbaijan</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="border-t border-gray-800 pt-8 text-center text-gray-400">
+                <p>&copy; 2025 Bloo — All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Smart navbar color adaptation
+        function handleNavbarScroll() {
+            const navbar = document.getElementById('navbar');
+            const scrollY = window.scrollY;
+            
+            // Remove all navbar classes first
+            navbar.classList.remove('navbar-glass', 'navbar-white');
+            
+            if (scrollY > 50) {
+                // When scrolled down - solid white
+                navbar.classList.add('navbar-white');
+            } else {
+                // At the very top - glass effect
+                navbar.classList.add('navbar-glass');
+            }
+        }
+
+        // Mobile menu functionality
+        function setupMobileMenu() {
+            const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+            const mobileMenu = document.getElementById('mobile-menu');
+            const menuIcon = document.getElementById('menu-icon');
+
+            mobileMenuBtn.addEventListener('click', function() {
+                mobileMenu.classList.toggle('active');
+                if (mobileMenu.classList.contains('active')) {
+                    menuIcon.classList.remove('fa-bars');
+                    menuIcon.classList.add('fa-times');
+                } else {
+                    menuIcon.classList.remove('fa-times');
+                    menuIcon.classList.add('fa-bars');
+                }
+            });
+
+            // Close mobile menu when clicking on a link
+            const mobileMenuLinks = mobileMenu.querySelectorAll('a');
+            mobileMenuLinks.forEach(link => {
+                link.addEventListener('click', function() {
+                    mobileMenu.classList.remove('active');
+                    menuIcon.classList.remove('fa-times');
+                    menuIcon.classList.add('fa-bars');
+                });
+            });
+        }
+
+        // Initialize everything when DOM is loaded
+        document.addEventListener('DOMContentLoaded', function() {
+            // Set initial navbar state
+            handleNavbarScroll();
+            
+            // Setup mobile menu
+            setupMobileMenu();
+            
+            // Event listeners
+            window.addEventListener('scroll', handleNavbarScroll);
+            
+            // Add search functionality
+            const searchInput = document.querySelector('input[type="text"]');
+            const searchButton = document.querySelector('button');
+            
+            if (searchButton) {
+                searchButton.addEventListener('click', function() {
+                    if (searchInput.value.trim()) {
+                        window.location.href = `{% url 'mentor_list' %}?q=${encodeURIComponent(searchInput.value)}`;
+                    }
+                });
+                
+                searchInput.addEventListener('keypress', function(e) {
+                    if (e.key === 'Enter' && searchInput.value.trim()) {
+                        window.location.href = `{% url 'mentor_list' %}?q=${encodeURIComponent(searchInput.value)}`;
+                    }
+                });
+            }
+        });
+    </script>
+</body>
+</html>

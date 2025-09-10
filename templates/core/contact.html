@@ -1,0 +1,464 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact Us - Bloo</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css" rel="stylesheet">
+    <style>
+        @import "tailwindcss";
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: linear-gradient(-45deg, #001f3f, #5e399e, #401560, #001f3f);
+            background-size: 400% 400%;
+            animation: gradientShift 15s ease infinite;
+            min-height: 100vh;
+        }
+
+        .gradient-bg {
+            background: linear-gradient(-45deg, #001f3f, #5e399e, #401560, #001f3f);
+            background-size: 400% 400%;
+            animation: gradientShift 15s ease infinite;
+        }
+
+        @keyframes gradientShift {
+            0% {
+                background-position: 0% 50%;
+            }
+
+            50% {
+                background-position: 100% 50%;
+            }
+
+            100% {
+                background-position: 0% 50%;
+            }
+        }
+
+        .gradient-text {
+            background: linear-gradient(135deg, #0b2b5a 0%, #6b3bd9 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent !important;
+            background-clip: text;
+        }
+
+        .navbar-glass {
+            backdrop-filter: blur(20px);
+            background: rgba(255, 255, 255, 0.15);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.15);
+            transition: all 0.3s ease;
+        }
+
+        .navbar-white {
+            backdrop-filter: blur(20px);
+            background: rgba(255, 255, 255, 0.95);
+            border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+        }
+
+        .navbar-white .text-white {
+            color: #374151 !important;
+        }
+
+        .navbar-white .logo-icon i {
+            color: white !important;
+        }
+
+        .navbar-white .hover\\:text-purple-300:hover {
+            color: #6b3bd9 !important;
+        }
+
+        .focus-ring:focus {
+            outline: 2px solid #6b3bd9;
+            outline-offset: 2px;
+        }
+
+        .card-hover {
+            transition: all 0.3s ease;
+        }
+
+        .card-hover:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+        }
+
+        .form-input {
+            width: 100%;
+            padding: 0.75rem 1rem;
+            border: 1px solid #d1d5db;
+            border-radius: 0.5rem;
+            transition: all 0.3s ease;
+        }
+
+        .form-input:focus {
+            border-color: #6b3bd9;
+            box-shadow: 0 0 0 3px rgba(107, 59, 217, 0.1);
+            outline: none;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, #0b2b5a 0%, #6b3bd9 100%);
+            color: white;
+            transition: all 0.3s ease;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(107, 59, 217, 0.3);
+        }
+
+        .mobile-menu {
+            display: none;
+            position: absolute;
+            top: 100%;
+            left: 0;
+            right: 0;
+            background: #374151;
+            border-top: 1px solid rgba(255, 255, 255, 0.2);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+        }
+
+        .mobile-menu.active {
+            display: block;
+        }
+
+        .mobile-menu a {
+            display: block;
+            padding: 1rem 1.5rem;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            color: white;
+            text-decoration: none;
+            transition: background-color 0.2s;
+        }
+
+        .mobile-menu a:hover {
+            background-color: rgba(107, 59, 217, 0.2);
+            color: #c4b5fd;
+        }
+
+        .navbar-white .mobile-menu {
+            background: white;
+            border-top: 1px solid rgba(0, 0, 0, 0.1);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.15);
+        }
+
+        .navbar-white .mobile-menu a {
+            color: #374151;
+            border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+        }
+
+        .navbar-white .mobile-menu a:hover {
+            background-color: rgba(107, 59, 217, 0.1);
+            color: #6b3bd9;
+        }
+
+        .map-container {
+            border-radius: 0.5rem;
+            overflow: hidden;
+            height: 300px;
+        }
+
+        @media (min-width: 768px) {
+            .map-container {
+                height: 400px;
+            }
+        }
+    </style>
+</head>
+
+<body class="bg-gray-50">
+    <nav id="navbar" class="fixed w-full top-0 z-50 transition-all duration-300">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-16">
+                <div class="flex items-center space-x-3">
+                    <a href="{% url 'home' %}" class="flex items-center space-x-3">
+                        <div class="w-8 h-8 gradient-bg rounded-lg flex items-center justify-center logo-icon">
+                            <i class="fas fa-graduation-cap text-white text-sm"></i>
+                        </div>
+                        <span class="text-xl font-bold text-white">Bloo</span>
+                    </a>
+                </div>
+
+                <div class="hidden lg:flex items-center space-x-8 navbar-desktop">
+                    <a href="{% url 'home' %}"
+                        class="text-white hover:text-purple-300 transition-colors focus-ring rounded px-2 py-1">Home</a>
+                    <a href="{% url 'mentor_list' %}"
+                        class="text-white hover:text-purple-300 transition-colors focus-ring rounded px-2 py-1">Mentors</a>
+                    <a href="{% url 'coming_soon' %}"
+                        class="text-white hover:text-purple-300 transition-colors focus-ring rounded px-2 py-1">Students</a>
+                    <a href="{% url 'coming_soon' %}"
+                        class="text-white hover:text-purple-300 transition-colors focus-ring rounded px-2 py-1">Teachers</a>
+                    <a href="{% url 'coming_soon' %}"
+                        class="text-white hover:text-purple-300 transition-colors focus-ring rounded px-2 py-1">Events</a>
+                    <a href="{% url 'coming_soon' %}"
+                        class="text-white hover:text-purple-300 transition-colors focus-ring rounded px-2 py-1">Materials</a>
+                    <a href="{% url 'contact' %}"
+                        class="text-white hover:text-purple-300 transition-colors focus-ring rounded px-2 py-1">Contact</a>
+                </div>
+
+                <div class="lg:hidden navbar-mobile">
+                    <button id="mobile-menu-btn" class="text-white hover:text-purple-300 focus-ring rounded p-2">
+                        <i class="fas fa-bars" id="menu-icon"></i>
+                    </button>
+                </div>
+            </div>
+
+            <div id="mobile-menu" class="mobile-menu lg:hidden">
+                <a href="{% url 'home' %}" class="focus-ring">Home</a>
+                <a href="{% url 'mentor_list' %}" class="focus-ring">Mentors</a>
+                <a href="{% url 'coming_soon' %}" class="focus-ring">Students</a>
+                <a href="{% url 'coming_soon' %}" class="focus-ring">Teachers</a>
+                <a href="{% url 'coming_soon' %}" class="focus-ring">Events</a>
+                <a href="{% url 'coming_soon' %}" class="focus-ring">Materials</a>
+                <a href="{% url 'contact' %}" class="focus-ring">Contact</a>
+            </div>
+        </div>
+    </nav>
+
+    <main class="pt-16 min-h-screen">
+        <section class="bg-white/10 backdrop-blur-sm py-12 sm:py-16">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+                <h1 class="text-3xl sm:text-4xl font-bold mb-4 text-white">Contact Us</h1>
+                <p class="text-lg sm:text-xl text-gray-200 max-w-3xl mx-auto">Get in touch with us. We'd love to hear
+                    from you!</p>
+            </div>
+        </section>
+
+        <section class="py-12 sm:py-16 bg-white/5 backdrop-blur-sm">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="grid grid-cols-1 lg:grid-cols-1 gap-8 sm:gap-12">
+                    <div class="space-y-6 sm:space-y-8">
+                        <div class="bg-white rounded-xl p-6 shadow-sm card-hover">
+                            <h3 class="text-xl font-semibold mb-4 text-gray-800">Contact Information</h3>
+                            <div class="space-y-4">
+                                <div class="flex items-start">
+                                    <div
+                                        class="w-10 h-10 bg-purple-100 rounded-lg flex items-center justify-center mr-4 flex-shrink-0">
+                                        <i class="fas fa-map-marker-alt text-purple-600"></i>
+                                    </div>
+                                    <div>
+                                        <h4 class="font-medium text-gray-800">Address</h4>
+                                        <p class="text-gray-600">42 Zigh Highway Street<br>Baku, Azerbaijan</p>
+                                    </div>
+                                </div>
+                                <div class="flex items-start">
+                                    <div
+                                        class="w-10 h-10 bg-purple-100 rounded-lg flex items-center justify-center mr-4 flex-shrink-0">
+                                        <i class="fas fa-phone text-purple-600"></i>
+                                    </div>
+                                    <div>
+                                        <h4 class="font-medium text-gray-800">Phone</h4>
+                                        <p class="text-gray-600">+994 (50) 270-39-19</p>
+                                    </div>
+                                </div>
+                                <div class="flex items-start">
+                                    <div
+                                        class="w-10 h-10 bg-purple-100 rounded-lg flex items-center justify-center mr-4 flex-shrink-0">
+                                        <i class="fas fa-envelope text-purple-600"></i>
+                                    </div>
+                                    <div>
+                                        <h4 class="font-medium text-gray-800">Email</h4>
+                                        <p class="text-gray-600">info@bloo.az</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="bg-white rounded-xl p-6 shadow-sm card-hover">
+                            <h3 class="text-xl font-semibold mb-4 text-gray-800">Find Us</h3>
+                            <div class="map-container">
+                                <iframe
+                                    src="https://www.google.com/maps/embed?pb=!1m14!1m12!1m3!1d225.92000293678578!2d49.83230172483265!3d40.373279146540945!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!5e0!3m2!1saz!2shk!4v1757187685889!5m2!1saz!2shk"
+                                    width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy"
+                                    referrerpolicy="no-referrer-when-downgrade">
+                                </iframe>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="py-12 sm:py-16 bg-white">
+            <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="text-center mb-12">
+                    <h2 class="text-2xl sm:text-3xl font-bold mb-4 gradient-text">Frequently Asked Questions</h2>
+                    <p class="text-gray-600">Find answers to common questions about our platform</p>
+                </div>
+
+                <div class="space-y-6">
+                    <div class="bg-gray-50 rounded-xl p-6">
+                        <h3 class="text-lg font-semibold mb-2 text-gray-800">How do I become a mentor?</h3>
+                        <p class="text-gray-600">To become a mentor, please fill out our mentor application form on the
+                            mentors page. Our team will review your application and get back to you within 3-5 business
+                            days.</p>
+                    </div>
+
+                    <div class="bg-gray-50 rounded-xl p-6">
+                        <h3 class="text-lg font-semibold mb-2 text-gray-800">Is there a cost to ask questions to
+                            mentors?</h3>
+                        <p class="text-gray-600">Basic questions are free for all users. For more in-depth consultations
+                            or specialized advice, some mentors may offer premium services at reasonable rates.</p>
+                    </div>
+
+                    <div class="bg-gray-50 rounded-xl p-6">
+                        <h3 class="text-lg font-semibold mb-2 text-gray-800">How long does it take to get a response?
+                        </h3>
+                        <p class="text-gray-600">Most mentors respond within 24-48 hours. If you haven't received a
+                            response after 3 days, please contact our support team for assistance.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="bg-gray-900 text-white py-12 sm:py-16">
+        <div class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 sm:gap-8 mb-6 sm:mb-8">
+                <div class="sm:col-span-2 lg:col-span-1">
+                    <div class="flex items-center space-x-3 mb-4 sm:mb-6">
+                        <div class="w-8 h-8 gradient-bg rounded-lg flex items-center justify-center">
+                            <i class="fas fa-graduation-cap text-white text-sm"></i>
+                        </div>
+                    </div>
+                    <p class="text-gray-400 mb-4 text-sm sm:text-base">Empowering students, mentors, and teachers to
+                        achieve academic and social excellence together.</p>
+                    <div class="flex space-x-4">
+                        <a href="https://www.facebook.com/share/1B7a6V6cYD/"
+                            class="text-gray-400 hover:text-white transition-colors focus-ring rounded p-1">
+                            <i class="fab fa-facebook-f text-lg"></i>
+                        </a>
+                        <a href="https://www.threads.com/@bloo.az"
+                            class="text-gray-400 hover:text-white transition-colors focus-ring rounded p-1">
+                            <i class="fab fa-threads text-lg"></i>
+                        </a>
+                        <a href="https://www.instagram.com/bloo.az/"
+                            class="text-gray-400 hover:text-white transition-colors focus-ring rounded p-1">
+                            <i class="fab fa-instagram text-lg"></i>
+                        </a>
+                        <a href="https://www.linkedin.com/company/bloo-az/"
+                            class="text-gray-400 hover:text-white transition-colors focus-ring rounded p-1">
+                            <i class="fab fa-linkedin-in text-lg"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <div>
+                    <h4 class="text-base sm:text-lg font-semibold mb-4 sm:mb-6">Quick Links</h4>
+                    <ul class="space-y-2 sm:space-y-3">
+                        <li><a href="{% url 'home' %}"
+                                class="text-gray-400 hover:text-white transition-colors focus-ring rounded text-sm sm:text-base">Home</a>
+                        </li>
+                        <li><a href="{% url 'coming_soon' %}"
+                                class="text-gray-400 hover:text-white transition-colors focus-ring rounded text-sm sm:text-base">Students</a>
+                        </li>
+                        <li><a href="{% url 'mentor_list' %}"
+                                class="text-gray-400 hover:text-white transition-colors focus-ring rounded text-sm sm:text-base">Mentors</a>
+                        </li>
+                        <li><a href="{% url 'coming_soon' %}"
+                                class="text-gray-400 hover:text-white transition-colors focus-ring rounded text-sm sm:text-base">Teachers</a>
+                        </li>
+                        <li><a href="{% url 'coming_soon' %}"
+                                class="text-gray-400 hover:text-white transition-colors focus-ring rounded text-sm sm:text-base">Events</a>
+                        </li>
+                    </ul>
+                </div>
+
+                <div>
+                    <h4 class="text-base sm:text-lg font-semibold mb-4 sm:mb-6">Resources</h4>
+                    <ul class="space-y-2 sm:space-y-3">
+                        <li><a href="{% url 'coming_soon' %}"
+                                class="text-gray-400 hover:text-white transition-colors focus-ring rounded text-sm sm:text-base">Study
+                                Materials</a></li>
+                        <li><a href="{% url 'contact' %}"
+                                class="text-gray-400 hover:text-white transition-colors focus-ring rounded text-sm sm:text-base">Help
+                                Center</a></li>
+                        <li><a href="{% url 'contact' %}"
+                                class="text-gray-400 hover:text-white transition-colors focus-ring rounded text-sm sm:text-base">FAQ</a>
+                        </li>
+                    </ul>
+                </div>
+
+                <div>
+                    <h4 class="text-base sm:text-lg font-semibold mb-4 sm:mb-6">Contact</h4>
+                    <ul class="space-y-2 sm:space-y-3 text-gray-400 text-sm sm:text-base">
+                        <li class="flex items-center">
+                            <i class="fas fa-envelope mr-3 flex-shrink-0"></i>
+                            <span class="break-all">info@bloo.az</span>
+                        </li>
+                        <li class="flex items-center">
+                            <i class="fas fa-phone mr-3 flex-shrink-0"></i>
+                            <span>+994 (50) 270-39-19</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-map-marker-alt mr-3 mt-1 flex-shrink-0"></i>
+                            <span>42 Zigh Highway Street<br>Baku, Azerbaijan</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="border-t border-gray-800 pt-8 text-center text-gray-400">
+                <p>&copy; 2025 Bloo — All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        function handleNavbarScroll() {
+            const navbar = document.getElementById('navbar');
+            const scrollY = window.scrollY;
+
+            navbar.classList.remove('navbar-glass', 'navbar-white');
+
+            if (scrollY > 50) {
+                navbar.classList.add('navbar-white');
+            } else {
+                navbar.classList.add('navbar-glass');
+            }
+        }
+
+        function setupMobileMenu() {
+            const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+            const mobileMenu = document.getElementById('mobile-menu');
+            const menuIcon = document.getElementById('menu-icon');
+
+            mobileMenuBtn.addEventListener('click', function () {
+                mobileMenu.classList.toggle('active');
+                if (mobileMenu.classList.contains('active')) {
+                    menuIcon.classList.remove('fa-bars');
+                    menuIcon.classList.add('fa-times');
+                } else {
+                    menuIcon.classList.remove('fa-times');
+                    menuIcon.classList.add('fa-bars');
+                }
+            });
+
+            const mobileMenuLinks = mobileMenu.querySelectorAll('a');
+            mobileMenuLinks.forEach(link => {
+                link.addEventListener('click', function () {
+                    mobileMenu.classList.remove('active');
+                    menuIcon.classList.remove('fa-times');
+                    menuIcon.classList.add('fa-bars');
+                });
+            });
+        }
+
+        document.addEventListener('DOMContentLoaded', function () {
+            handleNavbarScroll();
+
+            setupMobileMenu();
+
+            window.addEventListener('scroll', handleNavbarScroll);
+        });
+    </script>
+</body>
+
+</html>
