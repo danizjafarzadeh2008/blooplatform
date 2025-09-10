@@ -10,7 +10,7 @@ def get_bool(name: str, default: bool = False) -> bool:
     return v.lower() in {"1", "true", "yes", "on"}
 
 SECRET_KEY = os.getenv("DJANGO_SECRET_KEY", "INSECURE-CHANGE-ME")
-DEBUG = get_bool("DJANGO_DEBUG", False)
+DEBUG = get_bool("DJANGO_DEBUG", True)
 
 ALLOWED_HOSTS = [h for h in os.getenv("DJANGO_ALLOWED_HOSTS", "").split(",") if h]
 CSRF_TRUSTED_ORIGINS = [o for o in os.getenv("CSRF_TRUSTED_ORIGINS", "").split(",") if o]
