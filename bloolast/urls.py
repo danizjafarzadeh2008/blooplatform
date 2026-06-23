@@ -5,7 +5,6 @@ from django.conf.urls.static import static
 from django.views.generic import RedirectView
 
 urlpatterns = [
-    path('admin/', RedirectView.as_view(url='/admin-secure-panel/', permanent=False)),
     path("", include("core.urls")),         
     path("mentors/", include("mentors.urls")),
 ]
