@@ -9,11 +9,11 @@ def get_bool(name: str, default: bool = False) -> bool:
         return default
     return v.lower() in {"1", "true", "yes", "on"}
 
-SECRET_KEY = os.getenv("DJANGO_SECRET_KEY", "django-insecure-s72rbahthzz0ir$b#ognfb_#n!=_x_r^_ng#z((1e+o(i28c8&")
+SECRET_KEY = os.getenv("DJANGO_SECRET_KEY", "WRITE YOUR SECRET KEY")
 DEBUG = get_bool("DJANGO_DEBUG", False)
 
-ALLOWED_HOSTS = ["3.25.99.116", 'bloo.az', 'www.bloo.az']
-CSRF_TRUSTED_ORIGINS = ["https://bloo.az", "https://www.bloo.az"]
+ALLOWED_HOSTS = []
+CSRF_TRUSTED_ORIGINS = []
 
 INSTALLED_APPS = [
     "django.contrib.admin",
